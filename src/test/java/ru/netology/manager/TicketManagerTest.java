@@ -16,6 +16,7 @@ public class TicketManagerTest {
     Ticket ticket4 = new Ticket(4, 5000.00, "AGB", "VKO", 150);
     Ticket ticket5 = new Ticket(5, 6000.00, "AGB", "VKO", 120);
     Ticket ticket6 = new Ticket(6, 7000.00, "AGB", "VKO", 90);
+    Ticket ticket8 = new Ticket(8, 9000.00, "AGB", "AUH", 90);
 
     @BeforeEach
     public void setup() {
@@ -25,6 +26,7 @@ public class TicketManagerTest {
         manager.add(ticket4);
         manager.add(ticket5);
         manager.add(ticket6);
+        manager.add(ticket8);
     }
 
     @Test
@@ -48,15 +50,25 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void noTicketFound() {
 
+        Ticket[] expected = {};
+        Ticket[] actual = manager.searchBy("AGB", "DME");
 
+        Assertions.assertArrayEquals(expected, actual);
 
+    }
 
+    @Test
+    public void shouldFindOnlyOneTicket() {
 
+        Ticket[] expected = {ticket8};
+        Ticket[] actual = manager.searchBy("AGB", "AUH");
 
+        Assertions.assertArrayEquals(expected, actual);
 
-
-
+    }
 }
 
 
